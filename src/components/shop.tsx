@@ -131,7 +131,7 @@ export default function Shop() {
                         className={`flex-1 rounded-xl py-3 text-xs font-medium uppercase tracking-[0.15em] transition-all duration-300 ${
                           justAdded
                             ? "bg-green-500 text-white"
-                            : "bg-white/20 backdrop-blur-sm text-white opacity-0 group-hover:opacity-100 hover:bg-white/30"
+                            : "bg-white/20 backdrop-blur-sm text-white opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto hover:bg-white/30"
                         }`}
                       >
                         {justAdded ? "Ajouté ✓" : "Ajouter au panier"}
@@ -146,7 +146,7 @@ export default function Shop() {
                         onClick={(e) => e.stopPropagation()}
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.97 }}
-                        className="rounded-xl bg-[#25D366] px-3 py-3 text-xs font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-[#20BD5C]"
+                        className="rounded-xl bg-[#25D366] px-3 py-3 text-xs font-medium text-white opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-300 hover:bg-[#20BD5C]"
                         aria-label="Commander via WhatsApp"
                       >
                         <span className="sr-only">WhatsApp</span>
