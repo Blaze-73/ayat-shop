@@ -61,11 +61,11 @@ export default function Footer() {
                 className="flex items-center gap-3 transition-colors hover:text-[#c4956a]"
               >
                 <Send className="h-5 w-5" />
-                +213 {WHATSAPP_NUMBER.substring(3, 6)} {WHATSAPP_NUMBER.substring(6)}
+                +212 {WHATSAPP_NUMBER.substring(3, 5)} {WHATSAPP_NUMBER.substring(5, 8)} {WHATSAPP_NUMBER.substring(8)}
               </a>
               <span className="flex items-center gap-3">
                 <MapPin className="h-5 w-5" />
-                Alger, Algérie
+                Asilah, Maroc
               </span>
             </div>
           </motion.div>

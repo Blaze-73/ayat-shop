@@ -9,7 +9,7 @@ import {
   type ReactNode,
 } from "react"
 
-export const WHATSAPP_NUMBER = "213000000000"
+export const WHATSAPP_NUMBER = "212600000000"
 
 export interface CartItem {
   name: string
@@ -98,7 +98,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const price = parseInt(i.price.replace(/\s/g, ""), 10)
     return sum + price * i.quantity
   }, 0)
-  const formattedTotal = totalPrice.toLocaleString("fr-DZ") + " DZD"
+  const formattedTotal = totalPrice.toLocaleString("fr-MA") + " MAD"
 
   return (
     <CartContext.Provider
@@ -131,7 +131,7 @@ function buildWhatsAppMessage(
   const lines = items.map(
     (i) => `• ${i.name} x${i.quantity} — ${(
       parseInt(i.price.replace(/\s/g, ""), 10) * i.quantity
-    ).toLocaleString("fr-DZ")} DZD`,
+    ).toLocaleString("fr-MA")} MAD`,
   )
   return encodeURIComponent(
     [

@@ -146,8 +146,8 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 Ajouter au panier —{" "}
                 {(
                   parseInt(product.price.replace(/\s/g, ""), 10) * quantity
-                ).toLocaleString("fr-DZ")}{" "}
-                DZD
+                ).toLocaleString("fr-MA")}{" "}
+                MAD
               </button>
 
               <a

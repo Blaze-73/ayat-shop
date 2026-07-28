@@ -130,8 +130,8 @@ export default function CartDrawer({
                             {(
                               parseInt(item.price.replace(/\s/g, ""), 10) *
                               item.quantity
-                            ).toLocaleString("fr-DZ")}{" "}
-                            DZD
+                            ).toLocaleString("fr-MA")}{" "}
+                            MAD
                           </p>
                         </div>
                       </div>
