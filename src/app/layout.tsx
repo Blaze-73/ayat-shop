@@ -15,27 +15,33 @@ const inter = Inter({
   display: "swap",
 })
 
+const fontDisplay = "swap"
+
 export const metadata: Metadata = {
-  title: "AYA — Artisanale & Élégance",
+  title: "AYA — Boutique de vêtements & accessoires à Asilah",
   description:
-    "Découvrez l'univers d'Aya : vêtements faits main, accessoires perliers et boucles d'oreilles artisanales. L'élégance à l'état pur.",
+    "Une sélection soignée de robes, accessoires perliers et boucles d'oreilles. Boutique artisanale à Asilah, Maroc.",
   keywords: [
-    "bijoux faits main",
-    "accessoires perliers",
-    "boucles d'oreilles artisanales",
     "vêtements femme",
-    "mode artisanale",
+    "accessoires mode",
+    "boucles d'oreilles",
+    "boutique Asilah",
+    "mode Maroc",
     "Aya",
   ],
   openGraph: {
-    title: "AYA — Artisanale & Élégance",
+    title: "AYA — Vêtements & Accessoires | Asilah",
     description:
-      "Découvrez l'univers d'Aya : vêtements faits main, accessoires perliers et boucles d'oreilles artisanales.",
+      "Une sélection soignée de robes, accessoires perliers et boucles d'oreilles, dénichée pour vous à Asilah.",
     type: "website",
     locale: "fr_FR",
+    siteName: "AYA",
   },
   icons: {
     icon: "/favicon.svg",
+  },
+  other: {
+    "Cache-Control": "public, max-age=31536000, immutable",
   },
 }
 
