@@ -20,7 +20,7 @@ export default function Shop() {
   return (
     <>
       <section
-        id="boutique"
+        id="selection"
         ref={ref}
         className="px-6 py-24 sm:py-32 bg-[#faf7f2]"
       >

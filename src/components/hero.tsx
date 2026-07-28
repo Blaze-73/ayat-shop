@@ -90,18 +90,18 @@ export default function Hero() {
           variants={itemVariants}
           className="font-serif font-bold text-[clamp(2.8rem,10vw,6rem)] leading-[1.05] tracking-[-0.02em] text-white drop-shadow-lg"
         >
-          L&apos;Art de
+          L&apos;Art des
           <br />
-          <span className="text-[#c4956a]">la Parure</span>
+          <span className="text-[#c4956a]">Vetements</span>
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
           className="mt-6 max-w-lg text-base sm:text-lg leading-relaxed text-white/70"
         >
-          Des pièces uniques, tissées de passion et de savoir-faire.
-          Des robes élégantes, accessoires perliers et boucles d&apos;oreilles
-          pour chaque occasion.
+          Une sélection soignée de robes, accessoires perliers
+          et boucles d&apos;oreilles, dénichée pour vous
+          à Asilah.
         </motion.p>
 
         <motion.div

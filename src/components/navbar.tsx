@@ -11,8 +11,6 @@ import { easeOut } from "@/lib/eases"
 const links = [
   { href: "/", label: "Accueil" },
   { href: "/boutique", label: "Boutique" },
-  { href: "/#categories", label: "Univers" },
-  { href: "/#creations", label: "Créations" },
   { href: "/#avis", label: "Avis" },
   { href: "/#contact", label: "Contact" },
 ]
