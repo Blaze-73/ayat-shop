@@ -51,7 +51,9 @@ export default function Navbar() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a
             href="/"
-            className="font-serif text-xl tracking-wide text-[#1a1a1a]"
+            className={`font-serif text-xl tracking-wide transition-colors ${
+              scrolled ? "text-[#1a1a1a]" : "text-white"
+            }`}
           >
             AYA
           </a>
@@ -61,7 +63,9 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-xs uppercase tracking-[0.15em] text-[#2c2c2c]/60 transition-colors hover:text-[#c4956a]"
+                className={`text-xs uppercase tracking-[0.15em] transition-colors hover:text-[#c4956a] ${
+                  scrolled ? "text-[#2c2c2c]/60" : "text-white/70"
+                }`}
               >
                 {link.label}
               </a>

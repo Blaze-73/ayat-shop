@@ -30,12 +30,17 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#f0e6d8]/40 via-[#faf7f2] to-[#faf7f2] pointer-events-none" />
 
       <motion.div
-        className="absolute inset-0 bg-cover bg-center pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2, delay: 4.5, ease: easeOut }}
-        style={{ backgroundImage: `url(${heroBg.src})` }}
-      />
+        className="absolute inset-0"
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-center pointer-events-none"
+          style={{ backgroundImage: `url(${heroBg.src})` }}
+        />
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+      </motion.div>
 
       <div className="absolute top-0 left-0 right-0 h-[70vh] bg-[radial-gradient(ellipse_80%_55%_at_50%_-15%,#c4956a20,transparent_70%)] pointer-events-none" />
 
@@ -75,7 +80,7 @@ export default function Hero() {
       >
         <motion.div
           variants={itemVariants}
-          className="mb-6 inline-flex items-center gap-3 rounded-full border border-[#c4956a]/20 bg-white/60 px-5 py-2 text-xs uppercase tracking-[0.2em] text-[#a0765a] backdrop-blur-sm"
+          className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.2em] text-white/80 backdrop-blur-sm"
         >
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#c4956a]" />
           Collection Printemps-Été 2026
@@ -83,16 +88,16 @@ export default function Hero() {
 
         <motion.h1
           variants={itemVariants}
-          className="font-serif text-[clamp(2.8rem,10vw,6rem)] leading-[1.05] tracking-[-0.02em] text-[#1a1a1a]"
+          className="font-serif font-bold text-[clamp(2.8rem,10vw,6rem)] leading-[1.05] tracking-[-0.02em] text-white drop-shadow-lg"
         >
-          L&apos;art de
+          L&apos;Art de
           <br />
-          <span className="text-[#c4956a]">parer</span> la femme
+          <span className="text-[#c4956a]">la Parure</span>
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
-          className="mt-6 max-w-lg text-base sm:text-lg leading-relaxed text-[#2c2c2c]/70"
+          className="mt-6 max-w-lg text-base sm:text-lg leading-relaxed text-white/70"
         >
           Des pièces uniques, tissées de passion et de savoir-faire.
           Des robes élégantes, accessoires perliers et boucles d&apos;oreilles
@@ -115,7 +120,7 @@ export default function Hero() {
             href="#contact"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-[#c4956a]/30 bg-white/60 px-8 py-4 text-sm font-medium uppercase tracking-[0.15em] text-[#2c2c2c] backdrop-blur-sm transition-colors hover:bg-white hover:border-[#c4956a]/60"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-sm font-medium uppercase tracking-[0.15em] text-white backdrop-blur-sm transition-colors hover:bg-white/20 hover:border-white/40"
           >
             Me contacter
           </motion.a>
@@ -129,7 +134,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#a0765a]/50 transition-colors hover:text-[#c4956a]"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 transition-colors hover:text-white"
       >
         <span className="text-[10px] uppercase tracking-[0.2em]">Découvrir</span>
         <motion.div
