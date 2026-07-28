@@ -1,9 +1,7 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Star } from "lucide-react"
-import { easeOut } from "@/lib/eases"
 
 const testimonials = [
   {
@@ -29,8 +27,24 @@ const testimonials = [
 ]
 
 export default function Testimonials() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-80px" })
+  const ref = useRef<HTMLElement>(null)
+  const [inView, setInView] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          obs.disconnect()
+        }
+      },
+      { rootMargin: "-80px" },
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
 
   return (
     <section
@@ -39,11 +53,10 @@ export default function Testimonials() {
       className="relative px-6 py-24 sm:py-32 overflow-hidden"
     >
       <div className="mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: easeOut }}
-          className="text-center"
+        <div
+          className={`text-center transition-all duration-700 ease-out ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
           <p className="text-xs uppercase tracking-[0.25em] text-[#a0765a]">
             Témoignages
@@ -52,21 +65,19 @@ export default function Testimonials() {
             Ce qu&apos;elles disent
           </h2>
           <div className="mx-auto mt-4 h-px w-12 bg-[#c4956a]/40" />
-        </motion.div>
+        </div>
 
         <div className="relative mt-14">
           <div className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-none -mx-6 px-6">
             {testimonials.map((t, i) => (
-              <motion.div
+              <div
                 key={t.name}
-                initial={{ opacity: 0, x: 40 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{
-                  duration: 0.6,
-                  ease: easeOut,
-                  delay: i * 0.1,
-                }}
-                className="min-w-[300px] sm:min-w-[340px] flex-shrink-0 snap-start"
+                className={`min-w-[300px] sm:min-w-[340px] flex-shrink-0 snap-start transition-all duration-700 ease-out ${
+                  inView
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 translate-x-10"
+                }`}
+                style={{ transitionDelay: `${i * 0.1}s` }}
               >
                 <div className="flex h-full flex-col rounded-2xl bg-white p-6 sm:p-8 shadow-sm border border-[#c4956a]/5">
                   <div className="flex gap-1 mb-4">
@@ -84,7 +95,7 @@ export default function Testimonials() {
                     — {t.name}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 

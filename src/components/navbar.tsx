@@ -1,12 +1,10 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ShoppingBag, Heart } from "lucide-react"
 import { useCart, useFavorites } from "@/lib/store"
 import CartDrawer from "@/components/cart-drawer"
 import FavoritesDrawer from "@/components/favorites-drawer"
-import { easeOut } from "@/lib/eases"
 
 const links = [
   { href: "/", label: "Accueil" },
@@ -77,19 +75,13 @@ export default function Navbar() {
               aria-label={`${favorites.length} favoris`}
             >
               <Heart className="h-4 w-4 text-red-400" />
-              <AnimatePresence>
-                {favorites.length > 0 && (
-                  <motion.span
-                    key={favorites.length}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    exit={{ scale: 0 }}
-                    className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-400 text-[10px] font-bold text-white"
-                  >
-                    {favorites.length}
-                  </motion.span>
-                )}
-              </AnimatePresence>
+              <span
+                className={`absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-400 text-[10px] font-bold text-white transition-transform duration-200 ${
+                  favorites.length > 0 ? "scale-100" : "scale-0"
+                }`}
+              >
+                {favorites.length}
+              </span>
             </button>
 
             <button
@@ -98,21 +90,13 @@ export default function Navbar() {
               aria-label="Ouvrir le panier"
             >
               <ShoppingBag className="h-4 w-4 text-[#c4956a]" />
-              <AnimatePresence>
-                {totalItems > 0 && (
-                  <motion.span
-                    key={totalItems}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    exit={{ scale: 0 }}
-                    className={`absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white ${
-                      lastAdded ? "bg-green-500" : "bg-[#c4956a]"
-                    }`}
-                  >
-                    {totalItems}
-                  </motion.span>
-                )}
-              </AnimatePresence>
+              <span
+                className={`absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white transition-transform duration-200 ${
+                  totalItems > 0 ? "scale-100" : "scale-0"
+                } ${lastAdded ? "bg-green-500" : "bg-[#c4956a]"}`}
+              >
+                {totalItems}
+              </span>
             </button>
 
             <button
@@ -132,32 +116,28 @@ export default function Navbar() {
           </div>
         </div>
 
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: easeOut }}
-              className="absolute top-full left-0 right-0 border-t border-[#c4956a]/10 bg-[#faf7f2]/95 backdrop-blur-xl md:hidden"
-              role="navigation"
-              aria-label="Menu mobile"
-            >
-              <nav className="flex flex-col px-6 py-6 gap-3">
-                {links.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="py-3 text-sm uppercase tracking-[0.15em] text-[#2c2c2c]/60 transition-colors hover:text-[#c4956a]"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div
+          className={`absolute top-full left-0 right-0 border-t border-[#c4956a]/10 bg-[#faf7f2]/95 backdrop-blur-xl md:hidden transition-all duration-300 ease-out ${
+            open
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 -translate-y-4 pointer-events-none"
+          }`}
+          role="navigation"
+          aria-label="Menu mobile"
+        >
+          <nav className="flex flex-col px-6 py-6 gap-3">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="py-3 text-sm uppercase tracking-[0.15em] text-[#2c2c2c]/60 transition-colors hover:text-[#c4956a]"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </header>
 
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />

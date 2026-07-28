@@ -14,7 +14,7 @@ export default function Hero() {
         className="absolute inset-0 opacity-0"
         style={{ animation: "hero-fade 0.8s ease-out 2s forwards" }}
       >
-        <Image src={heroBg} alt="" fill className="object-cover" priority />
+        <Image src={heroBg} alt="" fill className="object-cover" priority quality={50} />
         <div className="absolute inset-0 bg-black/40" />
       </div>
 

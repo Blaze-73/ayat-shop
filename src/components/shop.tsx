@@ -70,6 +70,7 @@ export default function Shop() {
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover"
                         loading="lazy"
+                        quality={60}
                       />
                     )}
                     <div
