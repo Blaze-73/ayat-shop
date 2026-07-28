@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
 import { easeOut, easeInOut } from "@/lib/eases"
+import heroBg from "@/images/messy-women-s-closet-filled-colorful-clothes-young-fill-many-outfits-clothing-shirts-dresses-69370739.webp"
 
 export default function Hero() {
   const containerVariants = {
@@ -27,6 +28,14 @@ export default function Hero() {
       className="relative flex min-h-dvh flex-col items-center justify-center px-6 pt-20 pb-16 overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-[#f0e6d8]/40 via-[#faf7f2] to-[#faf7f2] pointer-events-none" />
+
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, delay: 4.5, ease: easeOut }}
+        style={{ backgroundImage: `url(${heroBg.src})` }}
+      />
 
       <div className="absolute top-0 left-0 right-0 h-[70vh] bg-[radial-gradient(ellipse_80%_55%_at_50%_-15%,#c4956a20,transparent_70%)] pointer-events-none" />
 
@@ -112,18 +121,7 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        <motion.div
-          variants={itemVariants}
-          className="mt-16 flex flex-wrap items-center justify-center gap-4 text-xs uppercase tracking-[0.2em] text-[#a0765a]"
-        >
-          <span className="h-px w-8 bg-[#c4956a]/30 hidden sm:block" />
-          <span>Fait main</span>
-          <span className="h-px w-8 bg-[#c4956a]/30" />
-          <span>Sur mesure</span>
-          <span className="h-px w-8 bg-[#c4956a]/30" />
-          <span>Unique</span>
-          <span className="h-px w-8 bg-[#c4956a]/30 hidden sm:block" />
-        </motion.div>
+
       </motion.div>
 
       <motion.a

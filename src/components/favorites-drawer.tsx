@@ -113,14 +113,15 @@ export default function FavoritesDrawer({
                           </p>
                           <div className="flex gap-1.5 sm:gap-2">
                             <button
-                              onClick={() =>
+                              onClick={() => {
                                 addItem({
                                   name: product.name,
                                   category: product.category,
                                   price: product.price,
                                   gradient: product.gradient,
                                 })
-                              }
+                                onClose()
+                              }}
                               className="rounded-full bg-[#1a1a1a] px-2.5 py-1 sm:px-3 sm:py-1.5 text-[9px] sm:text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.15em] text-white whitespace-nowrap transition-colors hover:bg-[#c4956a]"
                             >
                               <ShoppingBag className="inline h-2.5 w-2.5 sm:h-3 sm:w-3 mr-0.5 sm:mr-1" />
