@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
 import { Globe, Send, MapPin, Heart } from "lucide-react"
+import { WHATSAPP_NUMBER } from "@/lib/store"
 import { easeOut } from "@/lib/eases"
 
 export default function Footer() {
@@ -54,13 +55,13 @@ export default function Footer() {
                 @aya.artisanale
               </a>
               <a
-                href="https://wa.me/213000000000"
+                href={`https://wa.me/${WHATSAPP_NUMBER}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 transition-colors hover:text-[#c4956a]"
               >
                 <Send className="h-5 w-5" />
-                +213 000 000 000
+                +213 {WHATSAPP_NUMBER.substring(3, 6)} {WHATSAPP_NUMBER.substring(6)}
               </a>
               <span className="flex items-center gap-3">
                 <MapPin className="h-5 w-5" />

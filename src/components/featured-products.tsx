@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Heart } from "lucide-react"
+import { useFavorites, getSingleProductWhatsAppUrl } from "@/lib/store"
 import { easeOut } from "@/lib/eases"
 
 const products = [
@@ -64,6 +65,7 @@ const productVariants = {
 export default function FeaturedProducts() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-80px" })
+  const { isFavorite, toggleFavorite } = useFavorites()
 
   return (
     <section
@@ -93,60 +95,80 @@ export default function FeaturedProducts() {
           animate={isInView ? "visible" : "hidden"}
           className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {products.map((product) => (
-            <motion.div
-              key={product.name}
-              variants={productVariants}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="group relative overflow-hidden rounded-2xl shadow-sm transition-shadow hover:shadow-lg"
-            >
-              <div
-                className={`relative h-64 sm:h-72 w-full bg-gradient-to-br ${product.gradient} flex flex-col justify-end p-6 overflow-hidden`}
+          {products.map((product) => {
+            const fav = isFavorite(product.name)
+            return (
+              <motion.div
+                key={product.name}
+                variants={productVariants}
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="group relative overflow-hidden rounded-2xl shadow-sm transition-shadow hover:shadow-lg"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
                 <div
-                  className="absolute inset-0 opacity-[0.07]"
-                  style={{
-                    backgroundImage: `
-                      repeating-linear-gradient(
-                        45deg,
-                        transparent,
-                        transparent 8px,
-                        rgba(255,255,255,0.3) 8px,
-                        rgba(255,255,255,0.3) 9px
-                      )
-                    `,
-                  }}
-                />
-
-                <button
-                  className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-all hover:bg-white/40 hover:scale-110 active:scale-95"
-                  aria-label="Ajouter aux favoris"
+                  className={`relative h-64 sm:h-72 w-full bg-gradient-to-br ${product.gradient} flex flex-col justify-end p-6 overflow-hidden`}
                 >
-                  <Heart className="h-4 w-4 text-white" />
-                </button>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <div className="relative z-10">
-                  <p
-                    className={`text-xs uppercase tracking-[0.2em] ${product.textDark ? "text-[#a0765a]" : "text-white/60"}`}
+                  <div
+                    className="absolute inset-0 opacity-[0.07]"
+                    style={{
+                      backgroundImage: `
+                        repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.3) 8px, rgba(255,255,255,0.3) 9px)
+                      `,
+                    }}
+                  />
+
+                  <button
+                    onClick={() => toggleFavorite(product.name)}
+                    className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-all hover:bg-white/40 hover:scale-110 active:scale-95"
+                    aria-label={
+                      fav ? "Retirer des favoris" : "Ajouter aux favoris"
+                    }
                   >
-                    {product.category}
-                  </p>
-                  <h3
-                    className={`mt-1 font-serif text-xl ${product.textDark ? "text-[#1a1a1a]" : "text-white"}`}
-                  >
-                    {product.name}
-                  </h3>
-                  <p
-                    className={`mt-1 text-sm ${product.textDark ? "text-[#2c2c2c]/60" : "text-white/50"}`}
-                  >
-                    {product.price}
-                  </p>
+                    <Heart
+                      className={`h-4 w-4 transition-all ${
+                        fav
+                          ? "fill-red-400 text-red-400 scale-110"
+                          : "text-white"
+                      }`}
+                    />
+                  </button>
+
+                  <div className="absolute bottom-6 left-6 right-6 z-10 flex gap-2">
+                    <a
+                      href={getSingleProductWhatsAppUrl(
+                        product.name,
+                        product.price,
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 rounded-xl bg-white/20 backdrop-blur-sm py-3 text-center text-xs font-medium uppercase tracking-[0.15em] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white/30"
+                    >
+                      Commander
+                    </a>
+                  </div>
+
+                  <div className="relative z-10">
+                    <p
+                      className={`text-xs uppercase tracking-[0.2em] ${product.textDark ? "text-[#a0765a]" : "text-white/60"}`}
+                    >
+                      {product.category}
+                    </p>
+                    <h3
+                      className={`mt-1 font-serif text-xl ${product.textDark ? "text-[#1a1a1a]" : "text-white"}`}
+                    >
+                      {product.name}
+                    </h3>
+                    <p
+                      className={`mt-1 text-sm ${product.textDark ? "text-[#2c2c2c]/60" : "text-white/50"}`}
+                    >
+                      {product.price}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </motion.div>
       </div>
     </section>
