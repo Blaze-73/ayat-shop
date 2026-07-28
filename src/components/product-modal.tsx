@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, ShoppingBag, Heart, Minus, Plus } from "lucide-react"
 import { useCart, useFavorites, getSingleProductWhatsAppUrl } from "@/lib/store"
@@ -14,6 +15,7 @@ interface ProductModalProps {
     gradient: string
     description?: string
     textDark?: boolean
+    image?: string
   } | null
   onClose: () => void
 }
@@ -56,6 +58,16 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
           <div
             className={`relative h-64 sm:h-80 w-full bg-gradient-to-br ${product.gradient}`}
           >
+            {product.image && (
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
+                priority
+              />
+            )}
             <div
               className="absolute inset-0 opacity-[0.06]"
               style={{
@@ -136,6 +148,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                       category: product.category,
                       price: product.price,
                       gradient: product.gradient,
+                      image: product.image,
                     })
                   }
                   onClose()

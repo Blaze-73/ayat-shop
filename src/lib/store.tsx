@@ -17,6 +17,7 @@ export interface CartItem {
   price: string
   gradient: string
   quantity: number
+  image?: string
 }
 
 interface CartContextType {

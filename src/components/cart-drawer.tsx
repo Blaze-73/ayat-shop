@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, Minus, Plus, Trash2, ShoppingBag } from "lucide-react"
 import { useCart, getWhatsAppUrl } from "@/lib/store"
@@ -82,8 +83,18 @@ export default function CartDrawer({
                       className="flex gap-4 rounded-2xl bg-white p-4 shadow-sm"
                     >
                       <div
-                        className={`h-20 w-20 shrink-0 rounded-xl bg-gradient-to-br ${item.gradient}`}
-                      />
+                        className={`relative h-14 w-14 sm:h-20 sm:w-20 shrink-0 rounded-xl overflow-hidden bg-gradient-to-br ${item.gradient}`}
+                      >
+                        {item.image && (
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            sizes="80px"
+                            className="object-cover"
+                          />
+                        )}
+                      </div>
                       <div className="flex flex-1 flex-col justify-between">
                         <div>
                           <div className="flex items-start justify-between gap-2">

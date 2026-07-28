@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { Heart, ShoppingBag, Filter } from "lucide-react"
 import { products, CATEGORIES, type Category } from "@/lib/products"
@@ -90,6 +91,16 @@ export default function BoutiquePage() {
                   <div
                     className={`relative h-56 sm:h-64 w-full bg-gradient-to-br ${product.gradient} overflow-hidden`}
                   >
+                    {product.image && (
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover"
+                        loading="lazy"
+                      />
+                    )}
                     <div
                       className="absolute inset-0 opacity-[0.06]"
                       style={{
@@ -139,6 +150,7 @@ export default function BoutiquePage() {
                             category: product.category,
                             price: product.price,
                             gradient: product.gradient,
+                            image: product.image,
                           })
                         }}
                         whileHover={{ scale: 1.03 }}

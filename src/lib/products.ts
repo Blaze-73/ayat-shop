@@ -1,3 +1,39 @@
+import c1 from "@/images/clothes/womens-black-and-white-dress-with-high-heels-shoes.webp"
+import c2 from "@/images/clothes/floral-blouse-with-jeans-photo.webp"
+import c3 from "@/images/clothes/01408615-02-1_front.webp"
+import c4 from "@/images/clothes/01361486-01-1_styledfront.webp"
+
+import a1 from "@/images/accessories/shopdressup_gold_statement_earrings-2_f3337c0b-2519-4699-8b8b-d32d75c4e7f5.webp"
+import a2 from "@/images/accessories/71aZNuQZwSL.webp"
+import a3 from "@/images/accessories/61kYg4sX5+L.webp"
+import a4 from "@/images/accessories/61kfRVhy4HL.webp"
+
+import b1 from "@/images/boucles/71EawIrRV-L.webp"
+import b2 from "@/images/boucles/7156Z-pcAeL.webp"
+import b3 from "@/images/boucles/61Y3uR6NaeL.webp"
+import b4 from "@/images/boucles/61pQTds-XJL.webp"
+
+const clothesImgs = [c1, c2, c3, c4]
+const accImgs = [a1, a2, a3, a4]
+const bouclesImgs = [b1, b2, b3, b4]
+
+const imgMap: Record<string, string[]> = {
+  "Vêtements": clothesImgs.map((i) => i.src),
+  "Accessoires": accImgs.map((i) => i.src),
+  "Boucles d'Oreilles": bouclesImgs.map((i) => i.src),
+}
+
+const catIdx: Record<string, number> = {}
+
+function pickImg(category: string): string {
+  const images = imgMap[category]
+  if (!images) return ""
+  if (!(category in catIdx)) catIdx[category] = 0
+  const idx = catIdx[category]
+  catIdx[category] = (idx + 1) % images.length
+  return images[idx]
+}
+
 export const CATEGORIES = [
   "Tous",
   "Vêtements",
@@ -16,9 +52,10 @@ export interface Product {
   textDark?: boolean
   description: string
   isNew?: boolean
+  image?: string
 }
 
-export const products: Product[] = [
+const productData: Omit<Product, "image">[] = [
   // Vêtements (8)
   {
     name: "Robe d'Été Fleurie",
@@ -195,5 +232,10 @@ export const products: Product[] = [
       "Créoles en laiton doré ornées de perles fines. Un intemporel revisité avec élégance.",
   },
 ]
+
+export const products: Product[] = productData.map((p) => ({
+  ...p,
+  image: pickImg(p.category),
+}))
 
 export const featuredProducts = products.filter((p) => p.isNew ?? false).slice(0, 6)

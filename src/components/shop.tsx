@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
+import Image from "next/image"
 import { motion, useInView } from "framer-motion"
 import { Heart, ArrowRight } from "lucide-react"
 import { useCart, useFavorites, getSingleProductWhatsAppUrl } from "@/lib/store"
@@ -61,6 +62,16 @@ export default function Shop() {
                   <div
                     className={`relative h-56 sm:h-64 w-full bg-gradient-to-br ${product.gradient} overflow-hidden`}
                   >
+                    {product.image && (
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover"
+                        loading="lazy"
+                      />
+                    )}
                     <div
                       className="absolute inset-0 opacity-[0.06]"
                       style={{
@@ -112,6 +123,7 @@ export default function Shop() {
                             category: product.category,
                             price: product.price,
                             gradient: product.gradient,
+                            image: product.image,
                           })
                         }}
                         whileHover={{ scale: 1.03 }}

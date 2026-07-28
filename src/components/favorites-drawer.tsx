@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, Heart, ShoppingBag } from "lucide-react"
 import { useFavorites, useCart, getSingleProductWhatsAppUrl } from "@/lib/store"
@@ -87,8 +88,18 @@ export default function FavoritesDrawer({
                       className="flex gap-3 sm:gap-4 rounded-2xl bg-white p-3 sm:p-4 shadow-sm"
                     >
                       <div
-                        className={`h-14 w-14 sm:h-20 sm:w-20 shrink-0 rounded-xl bg-gradient-to-br ${product.gradient}`}
-                      />
+                        className={`relative h-14 w-14 sm:h-20 sm:w-20 shrink-0 rounded-xl overflow-hidden bg-gradient-to-br ${product.gradient}`}
+                      >
+                        {product.image && (
+                          <Image
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            sizes="80px"
+                            className="object-cover"
+                          />
+                        )}
+                      </div>
                       <div className="flex flex-1 flex-col justify-between min-w-0">
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
@@ -119,6 +130,7 @@ export default function FavoritesDrawer({
                                   category: product.category,
                                   price: product.price,
                                   gradient: product.gradient,
+                                  image: product.image,
                                 })
                                 onClose()
                               }}
