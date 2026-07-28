@@ -66,36 +66,22 @@ export default function Hero() {
         }}
       />
 
-      <div className="absolute top-12 left-12 w-32 h-px bg-gradient-to-r from-[#c4956a]/30 to-transparent hidden sm:block" />
-      <div className="absolute top-12 left-12 w-px h-32 bg-gradient-to-b from-[#c4956a]/30 to-transparent hidden sm:block" />
-
-      <div className="absolute bottom-12 right-12 w-32 h-px bg-gradient-to-l from-[#c4956a]/30 to-transparent hidden sm:block" />
-      <div className="absolute bottom-12 right-12 w-px h-32 bg-gradient-to-t from-[#c4956a]/30 to-transparent hidden sm:block" />
-
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto"
       >
-        <motion.div
-          variants={itemVariants}
-          className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.2em] text-white/80 backdrop-blur-sm"
-        >
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#c4956a]" />
-          Collection Printemps-Été 2026
-        </motion.div>
-
         <motion.h1
           variants={itemVariants}
-          className="font-serif font-bold text-[clamp(2.8rem,10vw,6rem)] leading-[1.05] tracking-[-0.02em] text-white drop-shadow-lg"
+          className="font-serif text-[clamp(2.5rem,8vw,5rem)] leading-[1.1] tracking-[-0.02em] text-white"
         >
-          L&apos;Art des
+          Vêtements
           <br />
-          <span className="text-[#c4956a]">Vetements</span>
+          <span className="text-[#c4956a]">&amp; Accessoires</span>
         </motion.h1>
 
-        <motion.p
+<motion.p
           variants={itemVariants}
           className="mt-6 max-w-lg text-base sm:text-lg leading-relaxed text-white/70"
         >
