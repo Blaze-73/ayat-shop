@@ -5,21 +5,23 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ShoppingBag, Heart } from "lucide-react"
 import { useCart, useFavorites } from "@/lib/store"
 import CartDrawer from "@/components/cart-drawer"
+import FavoritesDrawer from "@/components/favorites-drawer"
 import { easeOut } from "@/lib/eases"
 
 const links = [
-  { href: "#accueil", label: "Accueil" },
-  { href: "#boutique", label: "Boutique" },
-  { href: "#categories", label: "Univers" },
-  { href: "#creations", label: "Créations" },
-  { href: "#avis", label: "Avis" },
-  { href: "#contact", label: "Contact" },
+  { href: "/", label: "Accueil" },
+  { href: "/boutique", label: "Boutique" },
+  { href: "/#categories", label: "Univers" },
+  { href: "/#creations", label: "Créations" },
+  { href: "/#avis", label: "Avis" },
+  { href: "/#contact", label: "Contact" },
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [cartOpen, setCartOpen] = useState(false)
+  const [favOpen, setFavOpen] = useState(false)
   const { totalItems, lastAdded } = useCart()
   const { favorites } = useFavorites()
 
@@ -48,7 +50,7 @@ export default function Navbar() {
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a
-            href="#accueil"
+            href="/"
             className="font-serif text-xl tracking-wide text-[#1a1a1a]"
           >
             AYA
@@ -66,16 +68,27 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
-            {favorites.length > 0 && (
-              <a
-                href="#boutique"
-                className="relative hidden md:flex h-9 w-9 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm transition-colors hover:bg-white"
-                aria-label={`${favorites.length} favoris`}
-              >
-                <Heart className="h-4 w-4 text-[#c4956a]" />
-              </a>
-            )}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setFavOpen(true)}
+              className="relative flex h-9 w-9 items-center justify-center rounded-full bg-white/80 backdrop-blur-sm transition-colors hover:bg-white"
+              aria-label={`${favorites.length} favoris`}
+            >
+              <Heart className="h-4 w-4 text-red-400" />
+              <AnimatePresence>
+                {favorites.length > 0 && (
+                  <motion.span
+                    key={favorites.length}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-400 text-[10px] font-bold text-white"
+                  >
+                    {favorites.length}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
 
             <button
               onClick={() => setCartOpen(true)}
@@ -146,6 +159,7 @@ export default function Navbar() {
       </header>
 
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+      <FavoritesDrawer open={favOpen} onClose={() => setFavOpen(false)} />
     </>
   )
 }
